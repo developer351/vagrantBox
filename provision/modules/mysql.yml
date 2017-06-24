@@ -1,0 +1,23 @@
+- name: Install MySQL
+  become: true
+  apt: pkg={{ item }} state=present update_cache=yes
+  with_items:
+      - mysql-server
+      - python-mysqldb
+
+- name: Blind drop MySQL
+  mysql_db:
+    name: "{{ db_name }}"
+    state: absent
+
+- name: Create MySQL DB
+  mysql_db:
+    name: "{{ db_name }}"
+    state: present
+
+- name: Create new MySQL User
+  mysql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_pass }}"
+    priv: '*.*:ALL'
+    state: present

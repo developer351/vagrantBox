@@ -1,0 +1,8 @@
+- name: Install Memcached
+  become: true
+  apt:
+    pkg: memcached
+    state: present
+    update_cache: yes
+  notify:
+      - restart memcached

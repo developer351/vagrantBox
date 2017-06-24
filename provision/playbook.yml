@@ -1,0 +1,15 @@
+- hosts: all
+  become: true
+  vars:
+      project_root: 'var/www/project'
+      db_name: db_marr
+      db_user: ddidev
+      db_pass: ddipass
+  handlers:
+    - include: handlers/main.yml
+  tasks:
+    - include: modules/php.yml
+    - include: modules/memcached.yml
+    - include: modules/nginx.yml
+    - include: modules/mysql.yml
+    - include: modules/system.yml

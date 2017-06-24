@@ -1,0 +1,17 @@
+- name: restart php-fastcgi
+  become: yes
+  service:
+    name: php5-fpm
+    state: restarted
+
+- name: restart nginx
+  become: true
+  service:
+    name: nginx
+    state: restarted
+
+- name: restart memcached
+  become: true
+  service:
+    name: memcached
+    state: restarted

@@ -1,0 +1,10 @@
+# install mc
+- stat: path=/usr/bin/mc
+  register: mc
+
+- name: Install MC
+  become: true
+  apt: pkg={{ item }} state=present update_cache=yes
+  with_items:
+      - mc
+  when: mc.stat.exists == false
